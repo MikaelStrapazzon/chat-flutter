@@ -1,3 +1,4 @@
+import 'package:chat_flutter/pages/ChatsPage/chats_page.dart';
 import 'package:chat_flutter/pages/DashboardPage/dashboard_page.dart';
 import 'package:chat_flutter/pages/LoginPage/login_page.dart';
 import 'package:chat_flutter/pages/RegisterPage/register_page.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Chat Flutter',
+      title: 'Xet Flutter',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF006492)),
         useMaterial3: true,
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginPage.id: (context) => LoginPage(),
         RegisterPage.id: (context) => RegisterPage(),
-        DashboardPage.id: (context) => const DashboardPage()
+        DashboardPage.id: (context) => const DashboardPage(),
+        ChatsPage.id: (context) => const ChatsPage()
       },
     );
   }

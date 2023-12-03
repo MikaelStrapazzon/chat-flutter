@@ -1,7 +1,7 @@
+import 'package:chat_flutter/pages/ChatsPage/chats_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/fire_auth.dart';
-import '../DashboardPage/dashboard_page.dart';
 import '../RegisterPage/register_page.dart';
 
 class LoginPage extends StatelessWidget {
@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
           email: emailController.text,
           password: passwordController.text,
         ).then((value) => Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const DashboardPage())));
+            MaterialPageRoute(builder: (context) => const ChatsPage())));
       } on Exception catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(backgroundColor: Colors.red, content: Text(e.toString())));
