@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
-import '../DashboardPage/dashboard_page.dart';
 import '../RegisterPage/register_page.dart';
 
 class LoginPage extends StatelessWidget {
@@ -41,7 +39,7 @@ class LoginPage extends StatelessWidget {
                     width: 120,
                   ),
                   const Text(
-                    'Semplice Moda ERP',
+                    'Xet Comunicações',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 22,
@@ -97,26 +95,6 @@ class LoginPage extends StatelessWidget {
                       if (!formKey.currentState!.validate()) {
                         return;
                       }
-
-                      http.post(
-                          Uri.parse(
-                              'http://192.168.0.112/SemplicePDM/login.php'),
-                          body: {
-                            'name': nameController.text,
-                            'password': passwordController.text
-                          }).then((value) {
-                        if (value.body.isNotEmpty) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const DashboardPage()));
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  backgroundColor: Colors.red,
-                                  content: Text('Name or Password is wrong')));
-                        }
-                      });
                     },
                   ),
                 ],

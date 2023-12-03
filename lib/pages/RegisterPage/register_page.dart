@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 import '../LoginPage/login_page.dart';
 
@@ -110,19 +109,6 @@ class RegisterPage extends StatelessWidget {
                       if (!formKey.currentState!.validate()) {
                         return;
                       }
-
-                      http.post(
-                          Uri.parse(
-                              'http://192.168.0.112/SemplicePDM/register.php'),
-                          body: {
-                            'name': nameController.text,
-                            'password': passwordController.text
-                          }).then((value) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginPage()));
-                      });
                     },
                   ),
                 ],
