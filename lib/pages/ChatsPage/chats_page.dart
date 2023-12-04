@@ -43,8 +43,17 @@ class _ChatScreenState extends State<ChatsPage> {
 
       if (code != "-1") {
         await _firestore.collection('chats:${_user?.uid}').add({
-          'collection_id': _user!.uid + code,
+          'chat_id': _user!.uid + code,
           'user': code,
+          'number_att': 0,
+          'last': Timestamp.now()
+        });
+
+        await _firestore.collection('chats:$code').add({
+          'chat_id': _user!.uid + code,
+          'user': _user!.uid,
+          'number_att': 0,
+          'last': Timestamp.now()
         });
 
         return;
@@ -61,7 +70,10 @@ class _ChatScreenState extends State<ChatsPage> {
     return Scaffold(
       appBar: const DefaultAppBar(title: 'Chats List'),
       body: StreamBuilder<QuerySnapshot>(
-        stream: _firestore.collection('chats:${_user?.uid}').snapshots(),
+        stream: _firestore
+            .collection('chats:${_user?.uid}')
+            .orderBy('last')
+            .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Center(
@@ -75,13 +87,18 @@ class _ChatScreenState extends State<ChatsPage> {
           for (var chat in chats!) {
             chatsWidget.add(ChatListItems(
               item: Chat(
-                  collection_id: chat['collection_id'], user: chat['user']),
+                  chat_id: chat['chat_id'],
+                  user: chat['user'],
+                  number_att: chat['number_att'],
+                  last: chat['last']),
               onTap: () => {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        ChatScreenPage(idChat: chat['collection_id']),
+                    builder: (context) => ChatScreenPage(
+                        idChat: chat['chat_id'],
+                        userId: chat['user'],
+                        keyChatList: chat.id),
                   ),
                 )
               },

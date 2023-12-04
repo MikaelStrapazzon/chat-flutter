@@ -35,6 +35,8 @@ class MyApp extends StatelessWidget {
         RegisterPage.id: (context) => RegisterPage(),
         ChatScreenPage.id: (context) => const ChatScreenPage(
               idChat: '',
+              userId: '',
+              keyChatList: '',
             ),
         ChatsPage.id: (context) => const ChatsPage()
       },

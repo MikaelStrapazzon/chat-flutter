@@ -6,8 +6,14 @@ import '../../components/appBars/DefaultAppBar/default_app_bar.dart';
 
 class ChatScreenPage extends StatefulWidget {
   final String idChat;
+  final String userId;
+  final String keyChatList;
 
-  const ChatScreenPage({super.key, required this.idChat});
+  const ChatScreenPage(
+      {super.key,
+      required this.idChat,
+      required this.userId,
+      required this.keyChatList});
 
   static String id = '/ChatScreenPage';
 
@@ -35,15 +41,23 @@ class _ChatScreenState extends State<ChatScreenPage> {
   void _sendMessage() async {
     String messageText = _messageController.text.trim();
 
-    if (messageText.isNotEmpty) {
-      await _firestore.collection(widget.idChat).add({
-        'text': messageText,
-        'senderId': _user!.uid,
-        'timestamp': FieldValue.serverTimestamp(),
-      });
-
-      _messageController.clear();
+    if (messageText.isEmpty) {
+      return;
     }
+
+    await _firestore.collection(widget.idChat).add({
+      'text': messageText,
+      'senderId': _user!.uid,
+      'timestamp': FieldValue.serverTimestamp(),
+    });
+
+    await _firestore
+        .collection('chats:${widget.userId}')
+        .doc(widget.keyChatList)
+        .update(
+            {'number_att': FieldValue.increment(1), 'last': Timestamp.now()});
+
+    _messageController.clear();
   }
 
   @override
@@ -95,13 +109,13 @@ class _ChatScreenState extends State<ChatScreenPage> {
                 Expanded(
                   child: TextField(
                     controller: _messageController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Type your message...',
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: _sendMessage,
                 ),
               ],
@@ -117,7 +131,8 @@ class MessageWidget extends StatelessWidget {
   final String messageText;
   final bool isMe;
 
-  MessageWidget({required this.messageText, required this.isMe});
+  const MessageWidget(
+      {super.key, required this.messageText, required this.isMe});
 
   @override
   Widget build(BuildContext context) {
@@ -126,11 +141,11 @@ class MessageWidget extends StatelessWidget {
       child: Align(
         alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
         child: Container(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           color: isMe ? Colors.blue : Colors.green,
           child: Text(
             messageText,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
             ),
           ),
