@@ -65,8 +65,8 @@ class _ChatScreenState extends State<ChatsPage> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Center(
-                child: Text(
-                    "You haven't started any Xet yet. How about starting a Xet with a friend?"));
+              child: CircularProgressIndicator(),
+            );
           }
 
           var chats = snapshot.data?.docs.reversed;

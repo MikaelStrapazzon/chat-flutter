@@ -10,6 +10,7 @@ class RegisterPage extends StatelessWidget {
   static String id = '/RegisterPage';
 
   final formKey = GlobalKey<FormState>();
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -21,6 +22,7 @@ class RegisterPage extends StatelessWidget {
     void register() async {
       try {
         await FireAuth.registerUsingEmailPassword(
+          name: nameController.text,
           email: emailController.text,
           password: passwordController.text,
         ).then((value) => Navigator.of(context).pushReplacement(
@@ -62,6 +64,21 @@ class RegisterPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8.0),
+                  TextFormField(
+                    controller: nameController,
+                    decoration: const InputDecoration(
+                      labelText: 'Name',
+                      errorStyle: TextStyle(color: Colors.red),
+                    ),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a name';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16.0),
                   TextFormField(
                     controller: emailController,
                     decoration: const InputDecoration(
