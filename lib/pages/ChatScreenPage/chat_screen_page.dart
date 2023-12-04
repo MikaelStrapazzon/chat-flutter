@@ -141,8 +141,16 @@ class MessageWidget extends StatelessWidget {
       child: Align(
         alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
         child: Container(
-          padding: const EdgeInsets.all(8.0),
-          color: isMe ? Colors.blue : Colors.green,
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: isMe ? Colors.blue : Colors.green,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(isMe ? 10 : 0),
+              bottomLeft: Radius.circular(isMe ? 10 : 0),
+              topRight: Radius.circular(isMe ? 0 : 10),
+              bottomRight: Radius.circular(isMe ? 0 : 10),
+            ),
+          ),
           child: Text(
             messageText,
             style: const TextStyle(
