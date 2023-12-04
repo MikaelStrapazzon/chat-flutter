@@ -5,6 +5,7 @@ import 'package:chat_flutter/types/chat.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 import '../../components/buttons/ActionButton/action_button.dart';
 import '../../components/floatingActionButtons/ExpandableFAB/expandable_fab.dart';
@@ -33,6 +34,26 @@ class _ChatScreenState extends State<ChatsPage> {
         _user = user;
       });
     });
+  }
+
+  escaneiaQRCode() async {
+    try {
+      String code = await FlutterBarcodeScanner.scanBarcode(
+          "#FFFF0000", "Cancelar", false, ScanMode.QR);
+
+      if (code != "-1") {
+        await _firestore.collection('chats:${_user?.uid}').add({
+          'collection_id': _user!.uid + code,
+          'user': code,
+        });
+
+        return;
+      }
+    } catch (e) {}
+
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        backgroundColor: Colors.red,
+        content: Text("Não foi possível escanear o código QR.")));
   }
 
   @override
@@ -85,8 +106,8 @@ class _ChatScreenState extends State<ChatsPage> {
             },
           ),
           ActionButton(
-            onPressed: () => {},
             icon: const Icon(Icons.qr_code_scanner),
+            onPressed: escaneiaQRCode,
           ),
         ],
       ),
