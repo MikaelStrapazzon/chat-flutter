@@ -15,8 +15,6 @@ class ChatScreenPage extends StatefulWidget {
       required this.userId,
       required this.keyChatList});
 
-  static String id = '/ChatScreenPage';
-
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }

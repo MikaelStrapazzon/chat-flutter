@@ -1,20 +1,14 @@
 import 'package:chat_flutter/pages/LoginPage/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SplashScreenPage extends StatelessWidget {
   const SplashScreenPage({super.key});
 
-  static String id = '/SplashScreen';
-
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 5), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) =>
-              LoginPage(), // Substitua HomeScreen pela tela que você deseja mostrar após a splash screen
-        ),
-      );
+      Get.offAll(() => LoginPage());
     });
 
     return const Scaffold(

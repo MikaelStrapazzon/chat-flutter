@@ -8,8 +8,6 @@ class QrCodePage extends StatefulWidget {
 
   const QrCodePage({super.key, required this.idUser});
 
-  static String id = '/QrCodePage';
-
   @override
   _QrCodePageState createState() => _QrCodePageState();
 }

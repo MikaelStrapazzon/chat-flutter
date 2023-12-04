@@ -1,13 +1,12 @@
 import 'package:chat_flutter/pages/ChatsPage/chats_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../services/fire_auth.dart';
 import '../RegisterPage/register_page.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
-
-  static String id = '/LoginPage';
 
   final formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
@@ -23,8 +22,7 @@ class LoginPage extends StatelessWidget {
         await FireAuth.signInUsingEmailPassword(
           email: emailController.text,
           password: passwordController.text,
-        ).then((value) => Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const ChatsPage())));
+        ).then((value) => Get.offAll(() => const ChatsPage()));
       } on Exception catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(backgroundColor: Colors.red, content: Text(e.toString())));
@@ -133,8 +131,7 @@ class LoginPage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => RegisterPage()));
+              Get.to(() => RegisterPage());
             },
           )
         ]),

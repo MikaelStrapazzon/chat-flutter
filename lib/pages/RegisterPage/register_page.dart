@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../services/fire_auth.dart';
 import '../ChatsPage/chats_page.dart';
@@ -6,8 +7,6 @@ import '../LoginPage/login_page.dart';
 
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
-
-  static String id = '/RegisterPage';
 
   final formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
@@ -25,8 +24,7 @@ class RegisterPage extends StatelessWidget {
           name: nameController.text,
           email: emailController.text,
           password: passwordController.text,
-        ).then((value) => Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const ChatsPage())));
+        ).then((value) => Get.offAll(() => const ChatsPage()));
       } on Exception catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(backgroundColor: Colors.red, content: Text(e.toString())));
@@ -164,8 +162,7 @@ class RegisterPage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginPage()));
+              Get.off(() => LoginPage());
             },
           )
         ]),

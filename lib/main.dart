@@ -5,6 +5,7 @@ import 'package:chat_flutter/pages/RegisterPage/register_page.dart';
 import 'package:chat_flutter/pages/SplashScreenPage/splash_screen_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'firebase_options.dart';
 
@@ -24,24 +25,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Xet Flutter',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF006492)),
         useMaterial3: true,
       ),
-      initialRoute: SplashScreenPage.id,
-      routes: {
-        SplashScreenPage.id: (context) => SplashScreenPage(),
-        LoginPage.id: (context) => LoginPage(),
-        RegisterPage.id: (context) => RegisterPage(),
-        ChatScreenPage.id: (context) => const ChatScreenPage(
-              idChat: '',
-              userId: '',
-              keyChatList: '',
-            ),
-        ChatsPage.id: (context) => const ChatsPage()
-      },
+      initialRoute: '/SplashScreen',
+      getPages: [
+        GetPage(name: '/SplashScreen', page: () => const SplashScreenPage()),
+        GetPage(name: '/LoginPage', page: () => LoginPage()),
+        GetPage(name: '/RegisterPage', page: () => RegisterPage()),
+        GetPage(
+            name: '/ChatScreenPage',
+            page: () =>
+                const ChatScreenPage(idChat: '', userId: '', keyChatList: '')),
+        GetPage(name: '/ChatsPage', page: () => const ChatsPage())
+      ],
     );
   }
 }

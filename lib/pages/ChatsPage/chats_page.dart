@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:get/get.dart';
 
 import '../../components/buttons/ActionButton/action_button.dart';
 import '../../components/floatingActionButtons/ExpandableFAB/expandable_fab.dart';
@@ -13,8 +14,6 @@ import '../ChatScreenPage/chat_screen_page.dart';
 
 class ChatsPage extends StatefulWidget {
   const ChatsPage({super.key});
-
-  static String id = '/ChatsPage';
 
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -86,23 +85,17 @@ class _ChatScreenState extends State<ChatsPage> {
 
           for (var chat in chats!) {
             chatsWidget.add(ChatListItems(
-              item: Chat(
-                  chat_id: chat['chat_id'],
-                  user: chat['user'],
-                  number_att: chat['number_att'],
-                  last: chat['last']),
-              onTap: () => {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChatScreenPage(
-                        idChat: chat['chat_id'],
-                        userId: chat['user'],
-                        keyChatList: chat.id),
-                  ),
-                )
-              },
-            ));
+                item: Chat(
+                    chat_id: chat['chat_id'],
+                    user: chat['user'],
+                    number_att: chat['number_att'],
+                    last: chat['last']),
+                onTap: () => Get.to(
+                      () => ChatScreenPage(
+                          idChat: chat['chat_id'],
+                          userId: chat['user'],
+                          keyChatList: chat.id),
+                    )));
           }
 
           return ListView(children: chatsWidget);
@@ -112,16 +105,8 @@ class _ChatScreenState extends State<ChatsPage> {
         distance: 80,
         children: [
           ActionButton(
-            icon: const Icon(Icons.qr_code),
-            onPressed: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => QrCodePage(idUser: _user!.uid),
-                ),
-              )
-            },
-          ),
+              icon: const Icon(Icons.qr_code),
+              onPressed: () => Get.to(() => QrCodePage(idUser: _user!.uid))),
           ActionButton(
             icon: const Icon(Icons.qr_code_scanner),
             onPressed: escaneiaQRCode,
