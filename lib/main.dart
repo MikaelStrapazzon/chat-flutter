@@ -1,5 +1,5 @@
+import 'package:chat_flutter/pages/ChatScreenPage/chat_screen_page.dart';
 import 'package:chat_flutter/pages/ChatsPage/chats_page.dart';
-import 'package:chat_flutter/pages/DashboardPage/dashboard_page.dart';
 import 'package:chat_flutter/pages/LoginPage/login_page.dart';
 import 'package:chat_flutter/pages/RegisterPage/register_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -33,7 +33,9 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginPage.id: (context) => LoginPage(),
         RegisterPage.id: (context) => RegisterPage(),
-        DashboardPage.id: (context) => const DashboardPage(),
+        ChatScreenPage.id: (context) => const ChatScreenPage(
+              idChat: '',
+            ),
         ChatsPage.id: (context) => const ChatsPage()
       },
     );
