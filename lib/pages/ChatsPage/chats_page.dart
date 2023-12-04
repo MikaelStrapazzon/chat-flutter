@@ -1,10 +1,13 @@
 import 'package:chat_flutter/components/appBars/DefaultAppBar/default_app_bar.dart';
 import 'package:chat_flutter/pages/ChatsPage/ChatListItems/chat_list_items.dart';
+import 'package:chat_flutter/pages/QrCodePage/qrcode_page.dart';
 import 'package:chat_flutter/types/chat.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../components/buttons/ActionButton/action_button.dart';
+import '../../components/floatingActionButtons/ExpandableFAB/expandable_fab.dart';
 import '../ChatScreenPage/chat_screen_page.dart';
 
 class ChatsPage extends StatefulWidget {
@@ -66,6 +69,26 @@ class _ChatScreenState extends State<ChatsPage> {
 
           return ListView(children: chatsWidget);
         },
+      ),
+      floatingActionButton: ExpandableFab(
+        distance: 80,
+        children: [
+          ActionButton(
+            icon: const Icon(Icons.qr_code),
+            onPressed: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => QrCodePage(idUser: _user!.uid),
+                ),
+              )
+            },
+          ),
+          ActionButton(
+            onPressed: () => {},
+            icon: const Icon(Icons.qr_code_scanner),
+          ),
+        ],
       ),
     );
   }
