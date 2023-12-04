@@ -7,13 +7,15 @@ import '../../components/appBars/DefaultAppBar/default_app_bar.dart';
 class ChatScreenPage extends StatefulWidget {
   final String idChat;
   final String userId;
+  final String myId;
   final String keyChatList;
 
   const ChatScreenPage(
       {super.key,
       required this.idChat,
       required this.userId,
-      required this.keyChatList});
+      required this.keyChatList,
+      required this.myId});
 
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -34,6 +36,11 @@ class _ChatScreenState extends State<ChatScreenPage> {
         _user = user;
       });
     });
+
+    _firestore
+        .collection('chats:${widget.myId}')
+        .doc(widget.keyChatList)
+        .update({'number_att': 0});
   }
 
   void _sendMessage() async {

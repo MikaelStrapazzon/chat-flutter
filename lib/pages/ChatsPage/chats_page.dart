@@ -41,14 +41,17 @@ class _ChatScreenState extends State<ChatsPage> {
           "#FFFF0000", "Cancelar", false, ScanMode.QR);
 
       if (code != "-1") {
-        await _firestore.collection('chats:${_user?.uid}').add({
+        await _firestore
+            .collection('chats:${_user?.uid}')
+            .doc(_user!.uid + code)
+            .set({
           'chat_id': _user!.uid + code,
           'user': code,
           'number_att': 0,
           'last': Timestamp.now()
         });
 
-        await _firestore.collection('chats:$code').add({
+        await _firestore.collection('chats:$code').doc(_user!.uid + code).set({
           'chat_id': _user!.uid + code,
           'user': _user!.uid,
           'number_att': 0,
@@ -94,6 +97,7 @@ class _ChatScreenState extends State<ChatsPage> {
                       () => ChatScreenPage(
                           idChat: chat['chat_id'],
                           userId: chat['user'],
+                          myId: _user!.uid,
                           keyChatList: chat.id),
                     )));
           }

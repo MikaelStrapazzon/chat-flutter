@@ -38,8 +38,12 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/RegisterPage', page: () => RegisterPage()),
         GetPage(
             name: '/ChatScreenPage',
-            page: () =>
-                const ChatScreenPage(idChat: '', userId: '', keyChatList: '')),
+            page: () => const ChatScreenPage(
+                  idChat: '',
+                  userId: '',
+                  keyChatList: '',
+                  myId: '',
+                )),
         GetPage(name: '/ChatsPage', page: () => const ChatsPage())
       ],
     );
