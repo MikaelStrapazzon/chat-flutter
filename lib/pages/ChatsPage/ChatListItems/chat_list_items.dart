@@ -14,39 +14,23 @@ class ChatListItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 26),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Row(
-          children: [
-            const Center(
-              child: Icon(
-                Icons.chat,
-                size: 24,
-                color: Color(0xFF6750A4),
-              ),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item.user,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+        onTap: onTap,
+        child: ListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 36),
+            leading: const Icon(Icons.chat), // Ícone à esquerda
+            title: Text(item.chat_id), // Texto no centro
+            trailing: item.number_att > 0
+                ? Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(24),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+                    child: Text(
+                      item.number_att.toString(),
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  )
+                : null));
   }
 }

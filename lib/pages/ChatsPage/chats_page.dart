@@ -68,7 +68,7 @@ class _ChatScreenState extends State<ChatsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const DefaultAppBar(title: 'Chats List'),
+      appBar: const DefaultAppBar(title: 'Xets List'),
       body: StreamBuilder<QuerySnapshot>(
         stream: _firestore
             .collection('chats:${_user?.uid}')
