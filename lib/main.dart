@@ -2,6 +2,7 @@ import 'package:chat_flutter/pages/ChatScreenPage/chat_screen_page.dart';
 import 'package:chat_flutter/pages/ChatsPage/chats_page.dart';
 import 'package:chat_flutter/pages/LoginPage/login_page.dart';
 import 'package:chat_flutter/pages/RegisterPage/register_page.dart';
+import 'package:chat_flutter/pages/SplashScreenPage/splash_screen_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -29,8 +30,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF006492)),
         useMaterial3: true,
       ),
-      initialRoute: LoginPage.id,
+      initialRoute: SplashScreenPage.id,
       routes: {
+        SplashScreenPage.id: (context) => SplashScreenPage(),
         LoginPage.id: (context) => LoginPage(),
         RegisterPage.id: (context) => RegisterPage(),
         ChatScreenPage.id: (context) => const ChatScreenPage(
