@@ -41,7 +41,7 @@ class RegisterPage extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         )),
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(14.0),
         child: Column(children: [
           Expanded(
             child: Form(
@@ -57,11 +57,11 @@ class RegisterPage extends StatelessWidget {
                     'Register Form',
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 8.0),
+                  const SizedBox(height: 6.0),
                   TextFormField(
                     controller: nameController,
                     decoration: const InputDecoration(
@@ -76,7 +76,7 @@ class RegisterPage extends StatelessWidget {
                       return null;
                     },
                   ),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: 6.0),
                   TextFormField(
                     controller: emailController,
                     decoration: const InputDecoration(
@@ -99,7 +99,7 @@ class RegisterPage extends StatelessWidget {
                       return null;
                     },
                   ),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: 6.0),
                   TextFormField(
                     controller: passwordController,
                     obscureText: true,
@@ -115,7 +115,7 @@ class RegisterPage extends StatelessWidget {
                       return null;
                     },
                   ),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: 6.0),
                   TextFormField(
                     obscureText: true,
                     decoration: const InputDecoration(
@@ -129,7 +129,7 @@ class RegisterPage extends StatelessWidget {
                       return null;
                     },
                   ),
-                  const SizedBox(height: 24.0),
+                  const SizedBox(height: 12.0),
                   ElevatedButton(
                     style: ButtonStyle(
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
